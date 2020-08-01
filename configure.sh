@@ -14,5 +14,5 @@ export CC=clang
 export CXX=clang++
 
 cmake \
-    -D CMAKE_BUILD_TYPE=minsizerel \
+    -D CMAKE_BUILD_TYPE=relwthdebinfo \
     .
