@@ -35,35 +35,11 @@ void Lexicon::read(var iFile)
     if (is.fail())
         throw error("Lexicon::read(): Open failed");
 
-    // Loop over lines.  Big hack in the middle as the format of CMU is WORD
-    // <tab> phone <space> phone.  We actually need a split(nil) that splits on
-    // any length of space.
+    // Loop over lines
     var f;
     while (f.getline(is))
     {
-        var a;
-        var s = "";
-#if 1
-        const char* str = f.str();
-        for (int i=0; i<f.size(); i++)
-        {
-            if (isspace(str[i]))
-            {
-                if (s.size() > 0)
-                {
-                    a.push(s.copy());
-                    s = "";
-                }
-            }
-            else
-                s.push(f[i]);
-        }
-        if (s.size() > 0)
-            a.push(s.copy());
-#else
-        a = {"one", "two"};
-#endif
-        // Add it to the lexicon
+        var a = f.split();
         var w = a.shift();
         mLex[w].push(a);
     }
