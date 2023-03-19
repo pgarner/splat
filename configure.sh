@@ -15,4 +15,5 @@ export CXX=clang++
 
 cmake \
     -D CMAKE_BUILD_TYPE=relwthdebinfo \
+    -D CMAKE_CXX_FLAGS="-Wall -Werror" \
     .
