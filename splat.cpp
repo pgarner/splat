@@ -10,6 +10,7 @@
 #include <fstream>
 #include <lube.h>
 #include <lube/config.h>
+#include "oneapi/dnnl/dnnl.hpp"
 
 namespace libube
 {
@@ -27,6 +28,7 @@ namespace libube
 
 using namespace std;
 using namespace libube;
+using namespace dnnl;
 
 void Lexicon::read(var iFile)
 {
@@ -89,5 +91,16 @@ int main(int argc, char** argv)
         var p = lex.phones();
         cout << "Phone list: " << p << endl;
     }
+
+    // DNN
+    engine::kind kind = validate_engine_kind(engine::kind::cpu);
+    engine eng = engine(kind, 0);
+    engine::kind k = eng.get_kind();
+    if (k == engine::kind::cpu)
+        cout << "Kind is CPU " << endl;
+    else
+        cout << "Kind is not CPU " << endl;
+
+    // Done
     return 0;
 }
