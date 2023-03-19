@@ -93,9 +93,10 @@ int main(int argc, char** argv)
     }
 
     // DNN
-    engine::kind kind = validate_engine_kind(engine::kind::cpu);
+    engine::kind kind = engine::kind::cpu;
     engine eng = engine(kind, 0);
-    engine::kind k = eng.get_kind();
+    stream str = stream(eng);
+    engine::kind k = str.get_engine().get_kind();
     if (k == engine::kind::cpu)
         cout << "Kind is CPU " << endl;
     else
